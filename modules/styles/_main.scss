@@ -1,0 +1,34 @@
+.mw-ext-rating {
+	.mw-ext-rating-body {
+		background: hsl(0, 0%, 98%);
+		padding: .5em;
+		max-width: 40em;
+		&:hover {
+			background: hsl(0, 0%, 96%);
+		}
+	}
+	.mw-ext-rating-content {
+		display: grid;
+		grid-template-columns: 20rem max-content;
+		align-items: center;
+	}
+	.mw-ext-rating-text,
+	.mw-ext-rating-count {
+	}
+	.mw-ext-rating-text {
+		font-weight: bold;
+
+	}
+	.mw-ext-rating-count {
+	}
+	.mw-ext-rating-star {
+		display: inline-block;
+		font-size: 1.2em;
+	}
+	.mw-ext-rating-star-plus {
+		color: hsl(217, 71%, 53%);
+	}
+	.mw-ext-rating-star-minus {
+		color: hsl(0, 0%, 86%);
+	}
+}

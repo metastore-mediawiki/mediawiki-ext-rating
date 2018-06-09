@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kitsune Solar"
+		]
+	},
+	"mw-ext-rating-desc": "Интеграция рейтинга в статью.",
+	"mw-ext-rating-error-category": "META:ERROR.EXT.Rating"
+}
