@@ -1,5 +1,9 @@
 <?php
 
+namespace MediaWiki\Extension\MW_EXT_Rating;
+
+use OutputPage, Parser, PPFrame, RequestContext, Skin;
+
 /**
  * Class MW_EXT_Rating
  */
@@ -25,12 +29,12 @@ class MW_EXT_Rating {
 	 * @param $getData
 	 *
 	 * @return mixed
-	 * @throws ConfigException
+	 * @throws \ConfigException
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	private static function getConfig( $getData ) {
-		$context   = new RequestContext();
-		$getConfig = $context->getConfig()->get( $getData );
+		$context   = RequestContext::getMain()->getConfig();
+		$getConfig = $context->get( $getData );
 
 		return $getConfig;
 	}
@@ -41,7 +45,7 @@ class MW_EXT_Rating {
 	 * @param Parser $parser
 	 *
 	 * @return bool
-	 * @throws MWException
+	 * @throws \MWException
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	public static function onParserFirstCallInit( Parser $parser ) {
@@ -58,10 +62,10 @@ class MW_EXT_Rating {
 	 * @param array $args
 	 *
 	 * @return string
-	 * @throws ConfigException
+	 * @throws \ConfigException
 	 * -------------------------------------------------------------------------------------------------------------- */
 
-	public static function onRenderTag( Parser $parser, PPFrame $frame, array $args ) {
+	public static function onRenderTag( Parser $parser, PPFrame $frame, $args = [] ) {
 		// Get options parser.
 		$getOptions = self::extractOptions( $args, $frame );
 
@@ -135,7 +139,7 @@ class MW_EXT_Rating {
 	 * @return array
 	 * -------------------------------------------------------------------------------------------------------------- */
 
-	private static function extractOptions( array $options, PPFrame $frame ) {
+	private static function extractOptions( $options = [], PPFrame $frame ) {
 		$results = [];
 
 		foreach ( $options as $option ) {
@@ -166,7 +170,7 @@ class MW_EXT_Rating {
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-		$out->addModuleStyles( array( 'ext.mw.rating.styles' ) );
+		$out->addModuleStyles( [ 'ext.mw.rating.styles' ] );
 
 		return true;
 	}

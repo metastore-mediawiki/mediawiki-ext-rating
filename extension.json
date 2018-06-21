@@ -11,7 +11,7 @@
 	"license-name": "[https://www.gnu.org/licenses/gpl-3.0.txt GPL-3.0]",
 	"type": "parserhook",
 	"require": {
-		"MediaWiki": ">= 1.30.0"
+		"MediaWiki": ">= 1.31.0"
 	},
 	"config": {
 		"MW_EXT_Rating_minCount": {
@@ -22,14 +22,14 @@
 		}
 	},
 	"AutoloadClasses": {
-		"MW_EXT_Rating": "MW_EXT_Rating.class.php"
+		"MediaWiki\\Extension\\MW_EXT_Rating\\MW_EXT_Rating": "MW_EXT_Rating.class.php"
 	},
 	"Hooks": {
 		"ParserFirstCallInit": [
-			"MW_EXT_Rating::onParserFirstCallInit"
+			"MediaWiki\\Extension\\MW_EXT_Rating\\MW_EXT_Rating::onParserFirstCallInit"
 		],
 		"BeforePageDisplay": [
-			"MW_EXT_Rating::onBeforePageDisplay"
+			"MediaWiki\\Extension\\MW_EXT_Rating\\MW_EXT_Rating::onBeforePageDisplay"
 		]
 	},
 	"ExtensionMessagesFiles": {
