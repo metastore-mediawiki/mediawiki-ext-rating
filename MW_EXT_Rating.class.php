@@ -2,42 +2,13 @@
 
 namespace MediaWiki\Extension\MW_EXT_Rating;
 
-use OutputPage, Parser, PPFrame, RequestContext, Skin;
+use OutputPage, Parser, PPFrame, Skin;
+use MediaWiki\Extension\MW_EXT_Core\MW_EXT_Core;
 
 /**
  * Class MW_EXT_Rating
  */
 class MW_EXT_Rating {
-
-	/**
-	 * * Clear DATA (escape html).
-	 *
-	 * @param $string
-	 *
-	 * @return string
-	 * -------------------------------------------------------------------------------------------------------------- */
-
-	private static function clearData( $string ) {
-		$outString = htmlspecialchars( trim( $string ), ENT_QUOTES );
-
-		return $outString;
-	}
-
-	/**
-	 * Get configuration parameters.
-	 *
-	 * @param $getData
-	 *
-	 * @return mixed
-	 * @throws \ConfigException
-	 * -------------------------------------------------------------------------------------------------------------- */
-
-	private static function getConfig( $getData ) {
-		$context   = RequestContext::getMain()->getConfig();
-		$getConfig = $context->get( $getData );
-
-		return $getConfig;
-	}
 
 	/**
 	 * Register tag function.
@@ -67,35 +38,35 @@ class MW_EXT_Rating {
 
 	public static function onRenderTag( Parser $parser, PPFrame $frame, $args = [] ) {
 		// Get options parser.
-		$getOptions = self::extractOptions( $args, $frame );
+		$getOption = MW_EXT_Core::extractOptions( $args, $frame );
 
 		// Argument: title.
-		$getTitle = self::clearData( $getOptions['title'] ?? '' ?: '' );
+		$getTitle = MW_EXT_Core::outClear( $getOption['title'] ?? '' ?: '' );
 		$outTitle = $getTitle;
 
 		// Argument: count.
-		$getCount = self::clearData( $getOptions['count'] ?? '' ?: '' );
+		$getCount = MW_EXT_Core::outClear( $getOption['count'] ?? '' ?: '' );
 		$outCount = $getCount;
 
 		// Argument: icon-plus.
-		$getIconPlus = self::clearData( $getOptions['icon-plus'] ?? '' ?: 'fas fa-star' );
+		$getIconPlus = MW_EXT_Core::outClear( $getOption['icon-plus'] ?? '' ?: 'fas fa-star' );
 		$outIconPlus = $getIconPlus;
 
 		// Argument: icon-minus.
-		$getIconMinus = self::clearData( $getOptions['icon-minus'] ?? '' ?: 'far fa-star' );
+		$getIconMinus = MW_EXT_Core::outClear( $getOption['icon-minus'] ?? '' ?: 'far fa-star' );
 		$outIconMinus = $getIconMinus;
 
 		// Setting: MW_EXT_Rating_minCount.
-		$setMinCount = self::getConfig( 'MW_EXT_Rating_minCount' );
+		$setMinCount = MW_EXT_Core::getConfig( 'MW_EXT_Rating_minCount' );
 
 		// Setting: MW_EXT_Rating_maxCount.
-		$setMaxCount = self::getConfig( 'MW_EXT_Rating_maxCount' );
+		$setMaxCount = MW_EXT_Core::getConfig( 'MW_EXT_Rating_maxCount' );
 
 		// Check rating title, count, set error category.
 		if ( empty( $outTitle ) || ! ctype_digit( $getCount ) || $getCount > $setMaxCount ) {
 			$parser->addTrackingCategory( 'mw-ext-rating-error-category' );
 
-			return false;
+			return null;
 		}
 
 		$outStars = '';
@@ -126,38 +97,6 @@ class MW_EXT_Rating {
 		$outParser = $outHTML;
 
 		return $outParser;
-	}
-
-	/**
-	 * Converts an array of values in form [0] => "name=value" into a real
-	 * associative array in form [name] => value. If no = is provided,
-	 * true is assumed like this: [name] => true.
-	 *
-	 * @param array $options
-	 * @param PPFrame $frame
-	 *
-	 * @return array
-	 * -------------------------------------------------------------------------------------------------------------- */
-
-	private static function extractOptions( $options = [], PPFrame $frame ) {
-		$results = [];
-
-		foreach ( $options as $option ) {
-			$pair = explode( '=', $frame->expand( $option ), 2 );
-
-			if ( count( $pair ) === 2 ) {
-				$name             = self::clearData( $pair[0] );
-				$value            = self::clearData( $pair[1] );
-				$results[ $name ] = $value;
-			}
-
-			if ( count( $pair ) === 1 ) {
-				$name             = self::clearData( $pair[0] );
-				$results[ $name ] = true;
-			}
-		}
-
-		return $results;
 	}
 
 	/**
