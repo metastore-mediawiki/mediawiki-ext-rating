@@ -83,7 +83,7 @@ class MW_EXT_Rating {
 		}
 
 		// Out HTML.
-		$outHTML = '<div class="mw-ext-rating mw-ext-rating-count-' . $outCount . '" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">';
+		$outHTML = '<div class="mw-ext-rating mw-ext-rating-count-' . $outCount . ' navigation-not-searchable" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">';
 		$outHTML .= '<div class="mw-ext-rating-body"><div class="mw-ext-rating-content">';
 		$outHTML .= '<div class="mw-ext-rating-text">' . $outTitle . '</div>';
 		$outHTML .= '<div class="mw-ext-rating-count">' . $outStars . '</div>';
