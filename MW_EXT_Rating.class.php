@@ -20,7 +20,7 @@ class MW_EXT_Rating {
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	public static function onParserFirstCallInit( Parser $parser ) {
-		$parser->setFunctionHook( 'rating', __CLASS__ . '::onRenderTag', Parser::SFH_OBJECT_ARGS );
+		$parser->setFunctionHook( 'rating', [ __CLASS__, 'onRenderTag' ], Parser::SFH_OBJECT_ARGS );
 
 		return true;
 	}
