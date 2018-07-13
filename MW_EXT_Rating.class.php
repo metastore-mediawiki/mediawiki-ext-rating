@@ -17,8 +17,7 @@ class MW_EXT_Rating {
 	 *
 	 * @return bool
 	 * @throws \MWException
-	 * -------------------------------------------------------------------------------------------------------------- */
-
+	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
 		$parser->setFunctionHook( 'rating', [ __CLASS__, 'onRenderTag' ], Parser::SFH_OBJECT_ARGS );
 
@@ -34,8 +33,7 @@ class MW_EXT_Rating {
 	 *
 	 * @return string
 	 * @throws \ConfigException
-	 * -------------------------------------------------------------------------------------------------------------- */
-
+	 */
 	public static function onRenderTag( Parser $parser, PPFrame $frame, $args = [] ) {
 		// Get options parser.
 		$getOption = MW_EXT_Core::extractOptions( $args, $frame );
@@ -106,8 +104,7 @@ class MW_EXT_Rating {
 	 * @param Skin $skin
 	 *
 	 * @return bool
-	 * -------------------------------------------------------------------------------------------------------------- */
-
+	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		$out->addModuleStyles( [ 'ext.mw.rating.styles' ] );
 

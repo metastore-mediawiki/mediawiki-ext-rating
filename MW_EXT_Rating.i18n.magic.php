@@ -8,15 +8,13 @@
  * @licence GNU GPL
  * @author Kitsune Solar
  */
-
 $magicWords = [];
 
 /**
  * English.
  *
  * @author Kitsune Solar
- * ------------------------------------------------------------------------------------------------------------------ */
-
+ */
 $magicWords['en'] = [
 	'rating' => [ 0, 'rating' ],
 ];
@@ -25,8 +23,7 @@ $magicWords['en'] = [
  * Russian.
  *
  * @author Kitsune Solar
- * ------------------------------------------------------------------------------------------------------------------ */
-
+ */
 $magicWords['ru'] = [
 	'rating' => [ 0, 'rating' ],
 ];
