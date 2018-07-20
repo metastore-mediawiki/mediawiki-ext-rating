@@ -3,7 +3,7 @@
 namespace MediaWiki\Extension\MW_EXT_Rating;
 
 use OutputPage, Parser, PPFrame, Skin;
-use MediaWiki\Extension\MW_EXT_Core\MW_EXT_Core;
+use MediaWiki\Extension\MW_EXT_Kernel\MW_EXT_Kernel;
 
 /**
  * Class MW_EXT_Rating
@@ -36,29 +36,29 @@ class MW_EXT_Rating {
 	 */
 	public static function onRenderTag( Parser $parser, PPFrame $frame, $args = [] ) {
 		// Get options parser.
-		$getOption = MW_EXT_Core::extractOptions( $args, $frame );
+		$getOption = MW_EXT_Kernel::extractOptions( $args, $frame );
 
 		// Argument: title.
-		$getTitle = MW_EXT_Core::outClear( $getOption['title'] ?? '' ?: '' );
+		$getTitle = MW_EXT_Kernel::outClear( $getOption['title'] ?? '' ?: '' );
 		$outTitle = $getTitle;
 
 		// Argument: count.
-		$getCount = MW_EXT_Core::outClear( $getOption['count'] ?? '' ?: '' );
+		$getCount = MW_EXT_Kernel::outClear( $getOption['count'] ?? '' ?: '' );
 		$outCount = $getCount;
 
 		// Argument: icon-plus.
-		$getIconPlus = MW_EXT_Core::outClear( $getOption['icon-plus'] ?? '' ?: 'fas fa-star' );
+		$getIconPlus = MW_EXT_Kernel::outClear( $getOption['icon-plus'] ?? '' ?: 'fas fa-star' );
 		$outIconPlus = $getIconPlus;
 
 		// Argument: icon-minus.
-		$getIconMinus = MW_EXT_Core::outClear( $getOption['icon-minus'] ?? '' ?: 'far fa-star' );
+		$getIconMinus = MW_EXT_Kernel::outClear( $getOption['icon-minus'] ?? '' ?: 'far fa-star' );
 		$outIconMinus = $getIconMinus;
 
 		// Setting: MW_EXT_Rating_minCount.
-		$setMinCount = MW_EXT_Core::getConfig( 'MW_EXT_Rating_minCount' );
+		$setMinCount = MW_EXT_Kernel::getConfig( 'MW_EXT_Rating_minCount' );
 
 		// Setting: MW_EXT_Rating_maxCount.
-		$setMaxCount = MW_EXT_Core::getConfig( 'MW_EXT_Rating_maxCount' );
+		$setMaxCount = MW_EXT_Kernel::getConfig( 'MW_EXT_Rating_maxCount' );
 
 		// Check rating title, count, set error category.
 		if ( empty( $outTitle ) || ! ctype_digit( $getCount ) || $getCount > $setMaxCount ) {
