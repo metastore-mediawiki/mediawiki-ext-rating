@@ -26,14 +26,14 @@ class MW_EXT_Rating {
 	/**
 	 * Render tag function.
 	 *
+	 * @param array $args
 	 * @param Parser $parser
 	 * @param PPFrame $frame
-	 * @param array $args
 	 *
 	 * @return string
 	 * @throws \ConfigException
 	 */
-	public static function onRenderTag( Parser $parser, PPFrame $frame, $args = [] ) {
+	public static function onRenderTag( array $args, Parser $parser, PPFrame $frame ) {
 		// Get options parser.
 		$getOption = MW_EXT_Kernel::extractOptions( $args, $frame );
 
